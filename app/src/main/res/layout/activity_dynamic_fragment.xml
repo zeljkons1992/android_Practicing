@@ -6,36 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".dynamicFragment">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnGlide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp">
 
-        <FrameLayout
-            android:id="@+id/fragLayout"
-            android:layout_width="match_parent"
-            android:layout_height="580dp">
+    </FrameLayout>
 
-        </FrameLayout>
+    <Button
+        android:id="@+id/btnGlide"
+        style="@style/btnStyle"
+        android:layout_width="0dp"
+        android:text="Add Glide Fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnPicasso"
+        app:layout_constraintTop_toBottomOf="@id/fragLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnGlide"
-                style="@style/btnStyle"
-                android:layout_width="177dp"
-                android:text="Add Glide Fragment" />
-
-            <Button
-                android:id="@+id/btnPicasso"
-                style="@style/btnStyle"
-                android:layout_width="177dp"
-                android:text="Add Picasso Fragment" />
-        </LinearLayout>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnPicasso"
+        style="@style/btnStyle"
+        android:layout_width="0dp"
+        android:text="Add Picasso Fragment"
+        app:layout_constraintStart_toEndOf="@id/btnGlide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>
