@@ -4,9 +4,5 @@
     <dimen name="recyclerViewHeight">500dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="imgFragment">100dp</dimen>
-    <dimen name="btnWidthPortait">460px</dimen>
-    <dimen name="btnWidthLandscape">810px</dimen>
-    <dimen name="recyclerViewHeightPortait">1150px</dimen>
-    <dimen name="recyclerViewHeightLandscape">450px</dimen>
     <dimen name="margin_default_between_elements">30dp</dimen>
 </resources>
