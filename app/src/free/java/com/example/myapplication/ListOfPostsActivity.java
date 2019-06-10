@@ -29,7 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RecyclerViewActivity extends Activity {
+public class ListOfPostsActivity extends Activity {
     private SharedPreferences sharedpreferences;
     @BindView(R.id.my_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.btnLogout)Button btnLogout;
@@ -40,7 +40,7 @@ public class RecyclerViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_list_of_posts);
         ButterKnife.bind(this);
         mAdapter = new RecyclerViewAdapter(myDataset);
     }
@@ -68,7 +68,7 @@ public class RecyclerViewActivity extends Activity {
             public void onClick(View v) {
                 sharedpreferences.edit().remove("mail").commit();
                 Intent mainIntent =
-                        new Intent(RecyclerViewActivity.this, LogInActivity.class);
+                        new Intent(ListOfPostsActivity.this, LoginActivity.class);
                 startActivity(mainIntent);
                 overridePendingTransition(R.anim.left_to_right, R.anim.slide_out);
                 finish();
@@ -92,17 +92,17 @@ public class RecyclerViewActivity extends Activity {
                 .build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Model>> call = jsonPlaceHolderApi.getPosts();
-        call.enqueue(new Callback<List<Model>>() {
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
+        call.enqueue(new Callback<List<Post>>() {
 
             @Override
-            public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println("Code " + response.code());
                     return;
                 }
 
-                List<Model> post = response.body();
+                List<Post> post = response.body();
                 for(int i = 0; i < post.size(); i++){
                     myDataset[i] = post.get(i).getTitle();
                 }
@@ -110,7 +110,7 @@ public class RecyclerViewActivity extends Activity {
                 mAdapter.notifyDataSetChanged();
             }
             @Override
-            public void onFailure(Call<List<Model>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
