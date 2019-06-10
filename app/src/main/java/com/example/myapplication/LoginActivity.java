@@ -16,12 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LogInActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     @BindView(R.id.input_email) EditText inputEmail;
     @BindView(R.id.input_password) EditText inputPassword;
@@ -34,14 +33,12 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
 
     @Override
     public void onStart(){
         super.onStart();
-
-        ButterKnife.bind(this);
-
         sharedpreferences = getSharedPreferences("mypref",Context.MODE_PRIVATE);
         inputEmail.addTextChangedListener(new MyTextWatcher(inputEmail));
         inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
@@ -53,17 +50,14 @@ public class LogInActivity extends AppCompatActivity {
         submitForm();
     }
     private void submitForm() {
-
-
-
         if (!validateEmail()) {
-            Toast.makeText(LogInActivity.this, "Wrong mail",
+            Toast.makeText(LoginActivity.this, "Wrong mail",
                     Toast.LENGTH_LONG).show();
             return;
         }
 
         if (!validatePassword()) {
-            Toast.makeText(LogInActivity.this, "Wrong password",
+            Toast.makeText(LoginActivity.this, "Wrong password",
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -71,7 +65,7 @@ public class LogInActivity extends AppCompatActivity {
         editor.putString("mail", inputEmail.getText().toString());
         editor.putString("password", inputPassword.getText().toString());
         editor.commit();
-        Intent intent = new Intent(LogInActivity.this, RecyclerViewActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ListOfPostsActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.right_to_left, R.anim.slide_out);
     }

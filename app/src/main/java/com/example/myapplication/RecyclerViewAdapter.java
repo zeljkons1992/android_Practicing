@@ -23,9 +23,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mDataset = myDataset;
     }
 
-    public RecyclerViewAdapter(Model[] myModels) {
-        for (int i = 0; i< myModels.length; i++) {
-            mDataset[i] = myModels[i].getTitle();
+    public RecyclerViewAdapter(Post[] myPosts) {
+        for (int i = 0; i< myPosts.length; i++) {
+            mDataset[i] = myPosts[i].getTitle();
         }
     }
 

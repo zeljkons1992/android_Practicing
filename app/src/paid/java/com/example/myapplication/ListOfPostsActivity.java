@@ -6,21 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
-import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -30,7 +27,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RecyclerViewActivity extends Activity {
+public class ListOfPostsActivity extends Activity {
     private SharedPreferences sharedpreferences;
     @BindView(R.id.my_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.btnSlider)Button slider;
@@ -43,7 +40,7 @@ public class RecyclerViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_list_of_posts);
         ButterKnife.bind(this);
         mAdapter = new RecyclerViewAdapter(myDataset);
     }
@@ -70,7 +67,7 @@ public class RecyclerViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(RecyclerViewActivity.this, ImagesViewActivity.class);
+                Intent intent = new Intent(ListOfPostsActivity.this, ImagesViewActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
@@ -79,7 +76,7 @@ public class RecyclerViewActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent =
-                        new Intent(RecyclerViewActivity.this, dynamicFragment.class);
+                        new Intent(ListOfPostsActivity.this, dynamicFragmentActivity.class);
                 startActivity(intent);
             }
         });
@@ -88,7 +85,7 @@ public class RecyclerViewActivity extends Activity {
             public void onClick(View v) {
                 sharedpreferences.edit().remove("mail").commit();
                 Intent mainIntent =
-                        new Intent(RecyclerViewActivity.this, LogInActivity.class);
+                        new Intent(ListOfPostsActivity.this, LoginActivity.class);
                 startActivity(mainIntent);
                 overridePendingTransition(R.anim.left_to_right, R.anim.slide_out);
                 finish();
@@ -112,17 +109,17 @@ public class RecyclerViewActivity extends Activity {
                 .build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Model>> call = jsonPlaceHolderApi.getPosts();
-        call.enqueue(new Callback<List<Model>>() {
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
+        call.enqueue(new Callback<List<Post>>() {
 
             @Override
-            public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println("Code " + response.code());
                     return;
                 }
 
-                List<Model> post = response.body();
+                List<Post> post = response.body();
                 for(int i = 0; i < post.size(); i++){
                     myDataset[i] = post.get(i).getTitle();
                 }
@@ -130,7 +127,7 @@ public class RecyclerViewActivity extends Activity {
                 mAdapter.notifyDataSetChanged();
             }
             @Override
-            public void onFailure(Call<List<Model>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

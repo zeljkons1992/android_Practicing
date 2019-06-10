@@ -10,9 +10,9 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class dynamicFragment extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener {
-    Tab1 fragGlide = new Tab1();
-    Tab2 fragPicasso= new Tab2();
+public class dynamicFragmentActivity extends AppCompatActivity implements GlideLoaderExampleFragment.OnFragmentInteractionListener, PicassoLoaderExampleFragment.OnFragmentInteractionListener {
+    GlideLoaderExampleFragment fragGlide = new GlideLoaderExampleFragment();
+    PicassoLoaderExampleFragment fragPicasso= new PicassoLoaderExampleFragment();
     FragmentManager fm = getSupportFragmentManager();
 
     @Override
@@ -24,8 +24,7 @@ public class dynamicFragment extends AppCompatActivity implements Tab1.OnFragmen
 
     @OnClick(R.id.btnGlide)
     void addGlide(View view) {
-        if(!fragGlide.isAdded())
-        {
+        if(!fragGlide.isAdded()) {
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(R.id.fragLayout, fragGlide);
             ft.remove(fragPicasso);

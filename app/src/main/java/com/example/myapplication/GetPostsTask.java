@@ -10,9 +10,9 @@ import java.net.URL;
 
 public class GetPostsTask extends AsyncTask<String, Void, String> {
 
-    private RecyclerViewActivity activity;
+    private ListOfPostsActivity activity;
 
-    public GetPostsTask(RecyclerViewActivity a) {
+    public GetPostsTask(ListOfPostsActivity a) {
         this.activity = a;
     }
 
@@ -51,9 +51,9 @@ public class GetPostsTask extends AsyncTask<String, Void, String> {
 
             result = stringBuilder.toString();
             Gson gson = new Gson();
-            Model mod[] = gson.fromJson(result, Model[].class);
+            Post mod[] = gson.fromJson(result, Post[].class);
 
-            for(Model model : mod) {
+            for(Post post : mod) {
                 activity.myDataset[i] = mod[i].getText();
                 i++;
             }

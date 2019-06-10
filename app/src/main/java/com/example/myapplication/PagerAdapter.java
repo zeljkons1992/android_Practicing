@@ -16,11 +16,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                Tab1 tab1 = new Tab1();
-                return tab1;
+                GlideLoaderExampleFragment glideLoaderExampleFragment = new GlideLoaderExampleFragment();
+                return glideLoaderExampleFragment;
             case 1:
-                Tab2 tab2 = new Tab2();
-                return tab2;
+                PicassoLoaderExampleFragment picassoLoaderExampleFragment = new PicassoLoaderExampleFragment();
+                return picassoLoaderExampleFragment;
 
                 default:
                     return null;

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".dynamicFragment" />
+        <activity android:name=".dynamicFragmentActivity" />
         <activity android:name=".ImagesViewActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecyclerViewActivity"
+        <activity android:name=".ListOfPostsActivity"
             android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".LogInActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
