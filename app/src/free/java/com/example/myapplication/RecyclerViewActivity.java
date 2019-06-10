@@ -115,19 +115,6 @@ public class RecyclerViewActivity extends Activity {
             }
         });
     }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            params.height=700;
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            params.height=1350;
-        }
-    }
-
     private class NetworkReceiver extends BroadcastReceiver{
 
         private RefreshPosts refreshPostsCallback;

@@ -36,10 +36,6 @@ public class RecyclerViewActivity extends Activity {
     @BindView(R.id.btnSlider)Button slider;
     @BindView(R.id.btnLogout)Button btnLogout;
     @BindView(R.id.btnFragment) Button btnFragment;
-    @BindDimen(R.dimen.btnWidthPortait) int btnWidthPortait;
-    @BindDimen(R.dimen.btnWidthLandscape) int btnWidthLandscape;
-    @BindDimen(R.dimen.recyclerViewHeightPortait) int recyclerViewHeightPortait;
-    @BindDimen(R.dimen.recyclerViewHeightLandscape) int recyclerViewHeightLandscape;
     public RecyclerView.Adapter mAdapter;
     public String[] myDataset = new String[100];
     NetworkReceiver networkReceiver = new NetworkReceiver(this::RetrofitGet);
@@ -138,24 +134,6 @@ public class RecyclerViewActivity extends Activity {
                 System.out.println(t.getMessage());
             }
         });
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        ViewGroup.LayoutParams recyclerViewLayoutParams=recyclerView.getLayoutParams();
-        ViewGroup.LayoutParams btnSlider = slider.getLayoutParams();
-        ViewGroup.LayoutParams btnFrag = btnFragment.getLayoutParams();
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerViewLayoutParams.height=recyclerViewHeightLandscape;
-            btnSlider.width = btnWidthLandscape;
-            btnFrag.width = btnWidthLandscape;
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            recyclerViewLayoutParams.height=recyclerViewHeightPortait;
-            btnSlider.width = btnWidthPortait;
-            btnFrag.width = btnWidthPortait;
-        }
     }
 
     private class NetworkReceiver extends BroadcastReceiver{
