@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Observable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -54,8 +55,7 @@ public class ListOfPostsActivity extends Activity {
         registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         sharedpreferences = getSharedPreferences("mypref",Context.MODE_PRIVATE);
-        TextView infoText = (TextView)findViewById(R.id.textView);
-        Intent intent = getIntent();
+        TextView infoText = findViewById(R.id.textView);
         if(sharedpreferences.contains("mail")) {
             infoText.setText("Welcome: " + sharedpreferences.getString("mail", ""));
         }
@@ -63,16 +63,13 @@ public class ListOfPostsActivity extends Activity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sharedpreferences.edit().remove("mail").commit();
-                Intent mainIntent =
-                        new Intent(ListOfPostsActivity.this, LoginActivity.class);
-                startActivity(mainIntent);
-                overridePendingTransition(R.anim.left_to_right, R.anim.slide_out);
-                finish();
-            }
+        btnLogout.setOnClickListener(v -> {
+            sharedpreferences.edit().remove("mail").commit();
+            Intent mainIntent =
+                    new Intent(ListOfPostsActivity.this, LoginActivity.class);
+            startActivity(mainIntent);
+            overridePendingTransition(R.anim.left_to_right, R.anim.slide_out);
+            finish();
         });
     }
 
