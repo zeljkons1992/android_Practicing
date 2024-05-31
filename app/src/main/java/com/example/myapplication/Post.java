@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-public class Model {
+public class Post {
 
     private int userId;
     private int id;

@@ -23,10 +23,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 Intent mainIntent;
                 if(sharedpreferences.getString("mail", "")!= "") {
-                    mainIntent = new Intent(SplashScreenActivity.this, RecyclerViewActivity.class);
+                    mainIntent = new Intent(SplashScreenActivity.this, ListOfPostsActivity.class);
                 }
                 else {
-                    mainIntent = new Intent(SplashScreenActivity.this, LogInActivity.class);
+                    mainIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 }
                 SplashScreenActivity.this.startActivity(mainIntent);
                 SplashScreenActivity.this.finish();
